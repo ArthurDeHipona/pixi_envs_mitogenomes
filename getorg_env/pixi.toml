@@ -1,0 +1,36 @@
+[workspace]
+name = "getorganelle_pixi"
+description = "Ambiente  Pixi reproduzindo GetOrganelle 1.7.7.1"
+channels = ["conda-forge", "bioconda"]
+authors = ["Arthur Gonçalves <arthur.tmnk@gmail.com>"]
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+#Calling the tool
+getorg = "get_organelle_from_reads.py"
+
+
+#Test
+test = """
+get_organelle_config.py --add embplant_pt,embplant_mt;
+wget https://github.com/Kinggerm/GetOrganelleGallery/raw/master/Test/reads/Arabidopsis_simulated.1.fq.gz ;
+wget https://github.com/Kinggerm/GetOrganelleGallery/raw/master/Test/reads/Arabidopsis_simulated.2.fq.gz ;
+get_organelle_from_reads.py -1 Arabidopsis_simulated.1.fq.gz -2 Arabidopsis_simulated.2.fq.gz -t 1 -o Arabidopsis_simulated.plastome -F embplant_pt -R 10
+"""
+
+[dependencies]
+#Languages
+python = ">=3.6.15,<3.8"
+perl = ">=5.26.2"
+
+#Python ecosystem
+matplotlib = "*"
+psutil = "*"
+
+#Bioinformatic tools
+getorganelle = "==1.7.7.1"
+pigz = "*"
+
+#Modelu ssl
+openssl = "1.1.1*" 

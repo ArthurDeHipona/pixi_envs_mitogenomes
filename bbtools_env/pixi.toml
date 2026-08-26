@@ -1,0 +1,20 @@
+[workspace]
+name = "bbtols_env_pixi"
+channels = ["conda-forge", "bioconda"]
+description = "Ambiente dos pre-requisitos para utilizar o BBtols"
+authors = ["Arthur Gonçalves <arthur.tmnk@gmail.com>"]
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+install_bbtools = """
+wget https://sourceforge.net/projects/bbmap/files/latest/download -O BBTools.tar.gz &&
+tar -xzf BBTools.tar.gz &&
+cd bbmap &&
+./bbversion.sh
+"""
+
+[dependencies]
+
+openjdk = ">=25"

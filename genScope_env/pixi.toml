@@ -1,0 +1,32 @@
+[workspace]
+name = "genome_scope"
+description = "Ambiente Pixi para estimar genoma com GenomeScope"
+channels = ["conda-forge", "bioconda"]
+authors = ["Arthur Gonçalves <arthur.tmnk@gmail.com>"]
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+#Download and install genome scope
+
+install_genscope = """
+git clone https://github.com/tbenavi1/genomescope2.0.git &&
+cd genomescope2.0/ &&
+Rscript install.R
+"""
+
+#Calling the tool
+
+genscope = """
+./genomescope2.0/genomescope.R
+"""
+
+[dependencies]
+
+#KMC
+kmc = "==3.2.4"
+
+#GenomeScope dependencies
+r-base = "*"
+"r-minpack.lm" = "*"
+r-argparse = "*"

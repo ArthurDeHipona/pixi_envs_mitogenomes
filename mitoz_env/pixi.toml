@@ -1,0 +1,98 @@
+[workspace]
+name = "mitoz 3.6"
+description = "Ambiente Pixi reproduzindo MitoZ 3.6"
+channels = ["conda-forge", "bioconda"]
+authors = ["Arthur Gonçalves <arthur.tmnk@gmail.com>"]
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+#Install MitoZ 3.6
+install_mitoz = """
+echo "Baixando arquivos";
+curl -LO https://github.com/linzhi2013/MitoZ/releases/download/3.6/mitoz-3.6.tar.gz ;    
+tar -zxvf mitoz-3.6.tar.gz;
+cd mitoz-3.6;
+python3 setup.py install;
+rm mitoz-3.6.tar.gz
+"""
+#Checking circos' modules
+check_circos = "circos --modules"
+
+#Install NCBI database
+
+#Test
+test = """
+mkdir ./test;
+cd ./test;
+wget -cv https://raw.githubusercontent.com/linzhi2013/MitoZ/master/test/test.R1.fq.gz ;  
+wget -cv https://raw.githubusercontent.com/linzhi2013/MitoZ/master/test/test.R2.fq.gz ;  
+mitoz all \
+--outprefix test \
+--thread_number 4 \
+--clade Chordata \
+--genetic_code 2 \
+--species_name "Homo sapiens" \
+--fq1 test.R1.fq.gz \
+--fq2 test.R2.fq.gz \
+--fastq_read_length 151 \
+--data_size_for_mt_assembly 3,0 \
+--assembler megahit \
+--kmers_megahit 71 99 \
+--memory 50 \
+--requiring_taxa Chordata ;
+echo "Check test.results"
+"""
+
+#Calling the tool
+
+mitoz = "mitoz"
+
+[dependencies]
+# Languages
+python = ">=3.6,<3.9"
+perl = ">=5.32"
+
+# Python ecosystem
+biopython = "*"
+bs4 = "*"
+ete3 = ">=3.1.2"
+html5lib = "*"
+requests = "*"
+
+# Bioinformatics tools
+blast = "*"
+bwa = "*"
+circos = "0.69.*"
+fastp = "*"
+hmmer = "==3.1b2"
+infernal = "==1.1.1"
+megahit = "*"
+samtools = "*"
+seqkit = "*"
+spades = ">=3.15.4"
+tbl2asn = "*"
+tiara = "*"
+wise2 = "*"
+
+# System / utilities
+coreutils = "*"
+libgd = "*"
+openjdk = "*"
+pkgconfig = "*"
+
+# Perl ecosystem 
+perl-bioperl = "*"
+perl-app-cpanminus = "*"
+perl-clone = "*"
+perl-config-general = "*"
+perl-encode-locale = "*"
+perl-list-moreutils = "*"
+perl-math-bezier = "*"
+perl-math-round = "*"
+perl-math-vecstat = "*"
+perl-module-implementation = "*"
+perl-params-validate = "*"
+perl-set-intspan = "*"
+perl-statistics-basic = "*"
+perl-statistics-descriptive = "==3.0800"
