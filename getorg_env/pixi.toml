@@ -8,15 +8,15 @@ version = "0.1.0"
 
 [tasks]
 #Calling the tool
-getorg = "get_organelle_from_reads.py"
+getorg = "$PIXI_PROJECT_ROOT/get_organelle_from_reads.py"
 
 
 #Test
 test = """
-get_organelle_config.py --add embplant_pt,embplant_mt;
-wget https://github.com/Kinggerm/GetOrganelleGallery/raw/master/Test/reads/Arabidopsis_simulated.1.fq.gz ;
-wget https://github.com/Kinggerm/GetOrganelleGallery/raw/master/Test/reads/Arabidopsis_simulated.2.fq.gz ;
-get_organelle_from_reads.py -1 Arabidopsis_simulated.1.fq.gz -2 Arabidopsis_simulated.2.fq.gz -t 1 -o Arabidopsis_simulated.plastome -F embplant_pt -R 10
+$PIXI_PROJECT_ROOT/get_organelle_config.py --add embplant_pt,embplant_mt;
+wget https://github.com/Kinggerm/GetOrganelleGallery/raw/master/Test/reads/Arabidopsis_simulated.1.fq.gz -O $PIXI_PROJECT_ROOT/Arabidopsis_simulated.1.fq.gz;
+wget https://github.com/Kinggerm/GetOrganelleGallery/raw/master/Test/reads/Arabidopsis_simulated.2.fq.gz -O $PIXI_PROJECT_ROOT/Arabidopsis_simulated.2.fq.gz;
+$PIXI_PROJECT_ROOT/get_organelle_from_reads.py -1 Arabidopsis_simulated.1.fq.gz -2 Arabidopsis_simulated.2.fq.gz -t 1 -o Arabidopsis_simulated.plastome -F embplant_pt -R 10
 """
 
 [dependencies]

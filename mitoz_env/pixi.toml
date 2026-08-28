@@ -8,14 +8,16 @@ version = "0.1.0"
 
 [tasks]
 #Install MitoZ 3.6
-install_mitoz = """
-echo "Baixando arquivos";
-curl -LO https://github.com/linzhi2013/MitoZ/releases/download/3.6/mitoz-3.6.tar.gz ;    
-tar -zxvf mitoz-3.6.tar.gz;
+install_mitoz = { cmd = """
+if [! -d "$PIXI_PROJECT_ROOT/mitoz-3.6" ]; then
+    echo "Baixando arquivos" &&
+    curl -LO https://github.com/linzhi2013/MitoZ/releases/download/3.6/mitoz-3.6.tar.gz  
+tar -zxvf $PIXI_PROJECT_ROOT/mitoz-3.6.tar.gz;
 cd mitoz-3.6;
 python3 setup.py install;
 rm mitoz-3.6.tar.gz
-"""
+""" }
+
 #Checking circos' modules
 check_circos = "circos --modules"
 

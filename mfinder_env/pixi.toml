@@ -8,27 +8,30 @@ version = "0.1.0"
 
 [tasks]
 #Install MitoFinder
-install_mitofinder = """
-git clone https://github.com/RemiAllio/MitoFinder.git ;
-cd MitoFinder;
+install_mitofinder = { cmd = """
+if [ ! -d "$PIXI_PROJECT_ROOT/MitoFinder" ]; then
+  git clone https://github.com/RemiAllio/MitoFinder.git "$PIXI_PROJECT_ROOT/MitoFinder"
+fi
+cd "$PIXI_PROJECT_ROOT/MitoFinder" && 
 bash ./install.sh
-"""
+""" }
+
 
 #Install Pillow (Optional if you want to generate images for annotated contigs)
 install_pillow = "pip install pillow==6.2.2"
 
 #Calling the tool
-mitofinder = "/array1/arthurgdt/cleberi/mfinder/MitoFinder/mitofinder"
+mitofinder = "$PIXI_PROJECT_ROOT/MitoFinder/mitofinder"
 
 #Test assembly and annotation
 test1 = """
-cd /array1/arthurgdt/cleberi/mfinder/MitoFinder/test_case/;
+cd $PIXI_PROJECT_ROOT/MitoFinder/test_case/;
 ../mitofinder -j Aphaenogaster_megommata_SRR1303315 -1 Aphaenogaster_megommata_SRR1303315_R1_cleaned.fastq.gz -2 Aphaenogaster_megommata_SRR1303315_R2_cleaned.fastq.gz -r reference.gb -o 5 -p 8 -m 20 --override  
 """
 
 #Test only annotation
 test2 = """
-cd /array1/arthurgdt/cleberi/mfinder/MitoFinder/test_case/;
+cd $PIXI_PROJECT_ROOT/MitoFinder/test_case/;
 ../mitofinder -j Hospitalitermes_medioflavus_NCBI -a Hospitalitermes_medioflavus_NCBI.fasta -r Hospitalitermes_medioflavus_NCBI.gb -o 5
 """ 
 

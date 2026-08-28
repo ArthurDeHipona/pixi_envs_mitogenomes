@@ -9,16 +9,18 @@ version = "0.1.0"
 [tasks]
 #Download and install genome scope
 
-install_genscope = """
-git clone https://github.com/tbenavi1/genomescope2.0.git &&
-cd genomescope2.0/ &&
+install_genscope = { cmd = """
+if [ ! -d "$PIXI_PROJECT_ROOT/genomescope2.0" ]; then
+  git clone https://github.com/tbenavi1/genomescope2.0.git  "$PIXI_PROJECT_ROOT/genomescope2.0"
+fi
+cd $PIXI_PROJECT_ROOT/genomescope2.0/ &&
 Rscript install.R
-"""
+"""}
 
 #Calling the tool
 
 genscope = """
-./genomescope2.0/genomescope.R
+$PIXI_PROJECT_ROOT/genomescope2.0/genomescope.R
 """
 
 [dependencies]
