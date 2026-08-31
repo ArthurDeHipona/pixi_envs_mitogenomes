@@ -10,5 +10,5 @@ version = "0.1.0"
 
 [dependencies]
 
-bbmap == "40.02"
+bbmap = "==40.02"
 openjdk = ">=25"
