@@ -2,19 +2,21 @@
 name = "bbtols_env_pixi"
 channels = ["conda-forge", "bioconda"]
 description = "Ambiente dos pre-requisitos para utilizar o BBtols"
-authors = ["Arthur Gonçalves <arthur.tmnk@gmail.com>"]
+authors = ["Arthur Goncalves <arthur.tmnk@gmail.com>"]
 platforms = ["linux-64"]
 version = "0.1.0"
 
 [tasks]
 
 install_bbtools = { cmd = """
+bash -c '
 if [ ! -d "$PIXI_PROJECT_ROOT/bbmap" ]; then
     wget https://sourceforge.net/projects/bbmap/files/latest/download -O $PIXI_PROJECT_ROOT/BBTools.tar.gz
 fi
 tar -xzf $PIXI_PROJECT_ROOT/BBTools.tar.gz &&
 $PIXI_PROJECT_ROOT/bbmap/bbversion.sh &&
 rm -rf $PIXI_PROJECT_ROOT/BBTools.tar.gz
+'
 """}
 
 [dependencies]

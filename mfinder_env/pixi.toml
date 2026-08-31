@@ -2,18 +2,20 @@
 name = "mitofinder_pixi"
 description = "Ambiente  Pixi reproduzindo MitoFinder"
 channels = ["conda-forge", "bioconda"]
-authors = ["Arthur Gonçalves <arthur.tmnk@gmail.com>"]
+authors = ["Arthur Goncalves <arthur.tmnk@gmail.com>"]
 platforms = ["linux-64"]
 version = "0.1.0"
 
 [tasks]
 #Install MitoFinder
 install_mitofinder = { cmd = """
+bash -c '
 if [ ! -d "$PIXI_PROJECT_ROOT/MitoFinder" ]; then
   git clone https://github.com/RemiAllio/MitoFinder.git "$PIXI_PROJECT_ROOT/MitoFinder"
 fi
 cd "$PIXI_PROJECT_ROOT/MitoFinder" && 
 bash ./install.sh
+'
 """ }
 
 
