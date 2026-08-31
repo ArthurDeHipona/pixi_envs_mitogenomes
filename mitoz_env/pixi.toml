@@ -10,10 +10,12 @@ version = "0.1.0"
 #Install MitoZ 3.6
 install_mitoz = { cmd = """
 bash -c '
-if [! -d "$PIXI_PROJECT_ROOT/mitoz-3.6" ]; then
+if [ ! -d "$PIXI_PROJECT_ROOT/mitoz-3.6" ]; then
     echo "Baixando arquivos" &&
-    curl -LO https://github.com/linzhi2013/MitoZ/releases/download/3.6/mitoz-3.6.tar.gz  
+    curl -LO https://github.com/linzhi2013/MitoZ/releases/download/3.6/mitoz-3.6.tar.gz
+fi  
 tar -zxvf $PIXI_PROJECT_ROOT/mitoz-3.6.tar.gz &&
+cd $PIXI_PROJECT_ROOT/mitoz-3.6 &&
 python3 $PIXI_PROJECT_ROOT/mitoz-3.6/setup.py install &&
 rm $PIXI_PROJECT_ROOT/mitoz-3.6.tar.gz
 '
